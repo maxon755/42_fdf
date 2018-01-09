@@ -1,0 +1,12 @@
+*~
+*#*#
+.*
+!.gitignore
+*.o
+materials/*
+testing/*
+README.md
+cleantrash
+fdf
+libft/libft.a
+minilibx_macos/libmlx.a
