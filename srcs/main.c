@@ -6,7 +6,7 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 16:10:16 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/09 10:17:39 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/09 11:24:12 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,13 @@ int				main(int argc, char **argv)
 								ft_strjoin("FdF mgayduk - ", argv[1]));
 	env.obj = parse_content(get_content(argv[1]));
 	print_matrix(env.obj.vert);
+
+	//env.obj.vert = translate(env.obj.vert, 50, 50, 10);
+	env.obj.vert = scale(env.obj.vert, 2, 2, 0);
+	ft_putendl("transformed");
+	//print_matrix(env.obj.vert);
+
+	system("leaks fdf");
 	/*set_zero_pos(env);
 	env->map = dup_matrix(env->init_map);
 	env->center = get_center(env->map);

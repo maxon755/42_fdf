@@ -6,12 +6,14 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 10:01:01 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/09 10:08:54 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/09 11:26:26 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
+
+#include <stdio.h>
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -81,8 +83,12 @@ void			print_notations(t_env *env);
 int				draw_line(t_env *env, size_t start, size_t end);
 
 t_matrix		translate(t_matrix a, float x, float y, float z);
-int				scale(t_env *env, float x, float y, float z);
-int				rotate(t_env *env, float x_angle, float y_angle, float z_angle);
+t_matrix		scale(t_matrix a, float x, float y, float z);
+t_matrix        rotate_about_x_center(t_matrix a, float x);
+t_matrix        rotate_about_y_center(t_matrix a, float y);
+t_matrix        rotate_about_z_center(t_matrix a, float z);
+
+t_matrix		rotate(t_env *env, float x_angle, float y_angle, float z_angle);
 
 int				translations(int keycode, t_env *env);
 int				scalings(int keycode, t_env *env);
