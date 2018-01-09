@@ -6,7 +6,7 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 10:01:01 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/09 11:26:26 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/09 16:18:40 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include "../minilibx_macos/mlx.h"
 # include "../libft/libft.h"
 # include "reader.h"
+# include "vector.h"
 
 # define SCREEN_WIDTH	1024
 # define SCREEN_HEIGHT	768
@@ -50,6 +51,7 @@ typedef struct	s_node
 	long long	color;
 }				t_node;
 
+/*
 typedef struct	s_vector
 {
 	float		x;
@@ -57,10 +59,12 @@ typedef struct	s_vector
 	float		z;
 	float		w;
 }				t_vector;
+*/
 
 typedef struct	s_object
 {
 	t_matrix	vert;
+	t_matrix	morph;
 	long long	*colors;
 	size_t		*p_in_row;
 }				t_object;
@@ -70,6 +74,8 @@ typedef struct	s_env
 	void		*mlx;
 	void		*win;
 	t_object	obj;
+	t_object	world;
+	t_object	camera;
 }				t_env;
 
 t_vector		get_mean(t_matrix m);

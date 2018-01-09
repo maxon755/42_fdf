@@ -6,7 +6,7 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/25 13:54:57 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/06 14:43:46 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/09 12:35:44 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void			print_matrix(t_matrix m);
 void			free_matrix(t_matrix m);
 t_matrix		dup_matrix(t_matrix src);
 t_matrix		mult_matrix(t_matrix a, t_matrix b);
+t_matrix		mult_matrix_f(t_matrix a, t_matrix b);
+float			**get_identity_matrix(size_t rows, size_t cols);
 t_matrix		get_translation_matrix(float x, float y, float z);
 t_matrix		get_scale_matrix(float x, float y, float z);
 t_matrix		get_x_rot_matrix(float x_angle);

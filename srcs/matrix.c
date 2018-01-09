@@ -6,11 +6,9 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/25 13:50:31 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/09 11:35:30 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/09 12:11:09 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "../includes/fdf.h"
 
 #include "../includes/matrix.h"
 
@@ -35,33 +33,6 @@ float		**create_matrix(size_t rows, size_t cols)
 	}
 	m[i] = NULL;
 	return (m);
-}
-
-void		print_matrix(t_matrix m)
-{
-	size_t i;
-	size_t j;
-
-	if (!(m.values))
-	{
-		ft_putendl("The matrix doesn`t exist");
-		return ;
-	}
-	i = 0;
-	while (i < m.rows)
-	{
-		j = 0;
-		while (j < m.cols)
-		{
-			printf("%.2f ", m.values[i][j]);
-			//ft_putnbr(m.values[i][j]);
-			//ft_putchar(' ');
-			j++;
-		}
-		//ft_putchar('\n');
-		printf("\n");
-		i++;
-	}
 }
 
 void		free_matrix(t_matrix m)
@@ -123,6 +94,17 @@ t_matrix	mult_matrix(t_matrix a, t_matrix b)
 				c.values[i][j] += a.values[i][k] * b.values[k][j];
 		}
 	}
-	//free_matrix(a);
 	return (c);
 }
+
+t_matrix	mult_matrix_f(t_matrix a, t_matrix b)
+{
+	t_matrix c;
+	t_matrix temp;
+
+	temp = a;
+	c = mult_matrix(a, b);
+	free_matrix(temp);
+	return (c);
+}
+

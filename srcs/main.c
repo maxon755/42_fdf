@@ -6,7 +6,7 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 16:10:16 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/09 11:24:12 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/09 16:55:54 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,22 @@ void			set_zero_pos(t_env *env)
 	env->position.scale_z = 1;
 	}*/
 
+void		set_object_in_world(t_env *env)
+{
+	t_matrix t;
+	t_vector c;
+
+	env->world.morph.rows = 4;
+    env->world.morph.cols = 4;
+    env->world.morph.values = get_identity_matrix(env->world.morph.rows,
+												  env->world.morph.cols);
+	c = get_center(env->obj.vert);
+	t = get_translation_matrix(-c.x, -c.y, -c.z);
+	env->world.morph = mult_matrix_f(env->world.morph, t);
+	env->world.vert = mult_matrix(env->obj.vert, env->world.morph);
+	free_matrix(t);
+}
+
 int				main(int argc, char **argv)
 {
 	t_env env;
@@ -64,16 +80,13 @@ int				main(int argc, char **argv)
 		ft_putendl("Usage: ./fdf [file name]");
 		return (0);
 	}
-	env.mlx = mlx_init();
-	env.win = mlx_new_window(env.mlx, SCREEN_WIDTH, SCREEN_HEIGHT,
-								ft_strjoin("FdF mgayduk - ", argv[1]));
+	//env.mlx = mlx_init();
+	//env.win = mlx_new_window(env.mlx, SCREEN_WIDTH, SCREEN_HEIGHT,
+	//						ft_strjoin("FdF mgayduk - ", argv[1]));
 	env.obj = parse_content(get_content(argv[1]));
-	print_matrix(env.obj.vert);
 
-	//env.obj.vert = translate(env.obj.vert, 50, 50, 10);
-	env.obj.vert = scale(env.obj.vert, 2, 2, 0);
-	ft_putendl("transformed");
-	//print_matrix(env.obj.vert);
+	set_object_in_world(&env);
+	print_matrix(env.world.vert);
 
 	system("leaks fdf");
 	/*set_zero_pos(env);

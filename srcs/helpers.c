@@ -6,34 +6,11 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/26 18:15:50 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/04 18:27:32 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/09 12:04:16 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-
-t_vector	get_mean(t_matrix m)
-{
-	size_t		i;
-	t_vector	mid;
-
-	i = 0;
-	mid.x = 0;
-	mid.y = 0;
-	mid.z = 0;
-	while (i < m.rows)
-	{
-		mid.x += m.values[i][0];
-		mid.y += m.values[i][1];
-		mid.z += m.values[i][2];
-		i++;
-	}
-	mid.x = -(mid.x / m.rows);
-	mid.y = -(mid.y / m.rows);
-	mid.z = -(mid.z / m.rows);
-	mid.w = 1;
-	return (mid);
-}
 
 t_vector	get_center(t_matrix m)
 {
