@@ -6,7 +6,7 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/09 15:38:15 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/10 12:08:07 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/10 19:37:15 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ t_vector	subtraction(t_vector a, t_vector b)
 {
 	t_vector c;
 
-	c.x = a.x - b.x;
-	c.y = a.y - b.y;
-	c.z = a.z - b.z;
+	c.x = b.x - a.x;
+	c.y = b.y - a.y;
+	c.z = b.z - a.z;
 	return (c);
 }
 
@@ -73,5 +73,5 @@ t_vector	normalization(t_vector a)
 
 void		print_vector(t_vector a)
 {
-	printf("Vector\nx: %.3f\ny: %.3f\nz: %.3f\nw: %.3f\n", a.x, a.y, a.z, a.w);
+	printf("x: %.3f\ny: %.3f\nz: %.3f\nw: %.3f\n", a.x, a.y, a.z, a.w);
 }
