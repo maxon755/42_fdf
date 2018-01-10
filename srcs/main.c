@@ -6,7 +6,7 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 16:10:16 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/09 16:55:54 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/10 11:47:17 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,18 @@ int				main(int argc, char **argv)
 
 	set_object_in_world(&env);
 	print_matrix(env.world.vert);
+
+	t_vector target = get_center(env.world.vert);
+	print_vector(target);
+	t_vector eye = get_vector(0, 0, 5);
+	print_vector(eye);
+	t_vector up_dir = get_vector(0, 5, 0);
+
+	env.camera.look = look_at(eye, target, up_dir);
+	print_matrix(env.camera.look);
+	ft_putendl("Result camera matrix");
+	env.camera.vert = mult_matrix(env.world.vert, env.camera.look);
+	print_matrix(env.camera.vert);
 
 	system("leaks fdf");
 	/*set_zero_pos(env);

@@ -6,7 +6,7 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 10:01:01 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/09 16:18:40 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/10 14:41:20 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,25 @@ typedef struct	s_node
 	long long	color;
 }				t_node;
 
-/*
-typedef struct	s_vector
+typedef struct	s_clip
 {
-	float		x;
-	float		y;
-	float		z;
-	float		w;
-}				t_vector;
-*/
+	t_matrix	vert;
+	t_matrix	c_mat;
+	float		top;
+	float		bottom;
+	float		left;
+	float		right;
+}				t_clip;
+
+typedef struct	s_camera
+{
+	t_matrix	vert;
+	t_matrix	look;
+	float		near;
+	float		far;
+	float		fov_h;
+	float		fow_v;
+}				t_camera;
 
 typedef struct	s_object
 {
@@ -75,7 +85,7 @@ typedef struct	s_env
 	void		*win;
 	t_object	obj;
 	t_object	world;
-	t_object	camera;
+	t_camera	camera;
 }				t_env;
 
 t_vector		get_mean(t_matrix m);
@@ -95,6 +105,8 @@ t_matrix        rotate_about_y_center(t_matrix a, float y);
 t_matrix        rotate_about_z_center(t_matrix a, float z);
 
 t_matrix		rotate(t_env *env, float x_angle, float y_angle, float z_angle);
+
+t_matrix		look_at(t_vector eye, t_vector target, t_vector up_dir);
 
 int				translations(int keycode, t_env *env);
 int				scalings(int keycode, t_env *env);
