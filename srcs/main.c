@@ -6,7 +6,7 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 16:10:16 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/10 19:14:43 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/11 13:11:38 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int				expose_hook(t_env *env)
 	mlx_clear_window(env->mlx, env->win);
 	//print_notations(env);
 	//env->center = get_center(env->map);
-	draw_f(env);
+	draw_figure(env);
 	return (0);
 }
 /*
@@ -78,10 +78,24 @@ void			set_object_in_world(t_env *env)
     env->world.morph.values = get_identity_matrix(env->world.morph.rows,
 												  env->world.morph.cols);
 	c = get_center(env->obj.vert);
-	//env->world.morph = rotate_about_x_center(env->world.morph, DEG(30));
-	//env->world.morph = rotate_about_z_center(env->world.morph, DEG(45));
+	env->world.morph = rotate_about_y_center(env->world.morph, DEG(0));
+
 	env->world.morph = translate(env->world.morph, -c.x, -c.y, -c.z);
+	
+    ft_putendl("Morph world matrix 1");
+    print_matrix(env->world.morph);
+    ft_putstr("\n");
+
+	t_matrix mirr;
+	mirr.rows = 4;
+	mirr.cols = 4;
+	mirr.values = get_identity_matrix(mirr.rows, mirr.cols);
+	mirr.values[0][0] = -1;
+
+	env->world.morph = mult_matrix(env->world.morph, mirr);
+	
 	env->world.vert = mult_matrix(env->obj.vert, env->world.morph);
+
 	//free_matrix(t);
 	ft_putendl("model in the world");
 	print_matrix(env->world.vert);

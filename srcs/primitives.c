@@ -6,7 +6,7 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 10:34:40 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/06 09:01:42 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/11 11:44:54 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void			init_vars(t_point *delta, t_point *sign,
 	sign->x = s.x < e.x ? 1 : -1;
 	sign->y = s.y < e.y ? 1 : -1;
 }
-
+/*
 static long long	get_color(t_env *env, size_t start, size_t end, float t)
 {
 	long long color;
@@ -55,7 +55,7 @@ static float		get_param(t_env *env, size_t start,
 	denom = pow(pow(delta.x, 2) + pow(delta.y, 2), 0.5);
 	t = numer / denom;
 	return (t);
-}
+}*/
 
 static void			compute(t_point *s, t_point *error,
 							t_point delta, t_point sign)
@@ -80,17 +80,17 @@ int					draw_line(t_env *env, size_t start, size_t end)
 	t_point s;
 	t_point e;
 
-	s.x = env->map.values[start][0];
-	s.y = env->map.values[start][1];
-	e.x = env->map.values[end][0];
-	e.y = env->map.values[end][1];
+	s.x = env->view_port.vert.values[start][0];
+	s.y = env->view_port.vert.values[start][1];
+	e.x = env->view_port.vert.values[end][0];
+	e.y = env->view_port.vert.values[end][1];
 	init_vars(&delta, &sign, s, e);
 	error.x = delta.x - delta.y;
 	while (s.x != e.x || s.y != e.y)
 	{
-		mlx_pixel_put(env->mlx, env->win, s.x, s.y,
-						get_color(env, start, end,
-						get_param(env, start, s, delta)));
+		mlx_pixel_put(env->mlx, env->win, s.x, s.y, 0xffffff);
+					  //get_color(env, start, end,
+					  //get_param(env, start, s, delta)));
 		error.y = error.x * 2;
 		compute(&s, &error, delta, sign);
 	}

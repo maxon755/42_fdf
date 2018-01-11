@@ -6,7 +6,7 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/09 15:38:15 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/10 19:37:15 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/11 11:04:22 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,24 @@ t_vector	subtraction(t_vector a, t_vector b)
 	return (c);
 }
 
-t_vector	cross_production(t_vector a, t_vector b)
+t_vector	cross_production_right(t_vector a, t_vector b)
 {
 	t_vector c;
 
 	c.x = a.y * b.z - a.z * b.y;
 	c.y = a.z * b.x - a.x * b.z;
 	c.z = a.x * b.y - a.y * b.x;
+
+	return (c);
+}
+
+t_vector	cross_production_left(t_vector a, t_vector b)
+{
+	t_vector c;
+
+	c.x = a.z * b.y - a.y * b.z;
+	c.y = a.x * b.z - a.z * b.x;
+	c.z = a.y * b.x - a.x * b.y;
 
 	return (c);
 }
