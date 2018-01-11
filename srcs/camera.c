@@ -6,7 +6,7 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/10 08:52:55 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/11 16:19:03 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/11 17:44:45 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,13 @@ void            init_camera(t_env *env)
 	ft_putendl("Amp vector");
 	print_vector(amp);
 	ft_putstr("\n");
-	
-    c = 1 / tan(env->camera.fov_h / 2) * amp.x + 5;
+
+	if (amp.x > amp.y && amp.x > amp.z)
+		c = 1 / tan(env->camera.fov_h / 2) * amp.x + 5;
+	else if (amp.y > amp.x && amp.y > amp.z)
+		c = 1 / tan(env->camera.fov_v / 2) * amp.y + 5;
+	else // (amp.z > amp.x && amp.z > amp.y)
+		c = amp.z + 10;
 
 	eye = get_vector(0, 0, c);
 	ft_putendl("eye vector");
