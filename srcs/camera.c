@@ -6,7 +6,7 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/10 08:52:55 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/11 14:19:56 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/11 16:19:03 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,31 @@ void            init_camera(t_env *env)
     t_vector target;
     t_vector eye;
     t_vector up_dir;
+	t_vector amp;
+	float		c;
 
+    env->camera.near = 1;
+    env->camera.far = 10;
+    env->camera.fov_h = DEG(90);
+    env->camera.fov_v = env->camera.fov_h * SCREEN_HEIGHT / SCREEN_WIDTH;
+
+	printf("Camera angles:\nfov_h: %f\nfov_v: %f\n\n", RAD(env->camera.fov_h),
+		   RAD(env->camera.fov_v));
     target = get_center(env->world.vert);
 	ft_putendl("target vector");
     print_vector(target);
     ft_putstr("\n");
-    eye = get_vector(0, 5, 15);
+
+
+
+	amp = get_amp(env->world.vert);
+	ft_putendl("Amp vector");
+	print_vector(amp);
+	ft_putstr("\n");
+	
+    c = 1 / tan(env->camera.fov_h / 2) * amp.x + 5;
+
+	eye = get_vector(0, 0, c);
 	ft_putendl("eye vector");
     print_vector(eye);
 	ft_putstr("\n");
@@ -85,11 +104,5 @@ void            init_camera(t_env *env)
     env->camera.vert = mult_matrix(env->world.vert, env->camera.look);
     print_matrix(env->camera.vert);
     ft_putstr("\n");
-    env->camera.near = 1;
-    env->camera.far = 20;
-    env->camera.fov_h = DEG(90);
-    env->camera.fov_v = env->camera.fov_h * SCREEN_HEIGHT / SCREEN_WIDTH;
 
-	printf("Camera angles:\nfov_h: %f\nfov_v: %f\n\n", RAD(env->camera.fov_h),
-		   RAD(env->camera.fov_v));
 }

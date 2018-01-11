@@ -6,7 +6,7 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/26 18:15:50 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/09 12:04:16 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/11 16:18:38 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ t_vector	get_amp(t_matrix m)
 	int			max_z;
 	t_vector	amp;
 
-	amp.x = m.values[m.rows - 1][0];
-	amp.y = m.values[m.rows - 1][1];
+	amp.x = fabs(m.values[m.rows - 1][0] - m.values[0][0]);
+	amp.y = fabs(m.values[m.rows - 1][1] - m.values[0][1]);
 	min_z = m.values[0][2];
 	max_z = min_z;
 	i = 1;

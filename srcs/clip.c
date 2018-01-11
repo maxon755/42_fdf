@@ -6,7 +6,7 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/10 13:05:00 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/11 15:13:59 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/11 15:26:04 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	init_clip_mat(t_env *env)
     env->clip.clip_mat.values[2][2] = (f + n) / (f - n);
     env->clip.clip_mat.values[3][2] = - (2 * n * f) / (f - n);
     env->clip.clip_mat.values[2][3] = 1;
-    ft_putendl("Projection matrix");
+    ft_putendl("Clip matrix");
     print_matrix(env->clip.clip_mat);
     ft_putstr("\n");
 }
@@ -80,8 +80,9 @@ void		init_clip(t_env *env)
 	//replace_z(env);
     init_corners(env);
     init_clip_mat(env);
+
+    env->clip.vert = mult_matrix(env->camera.vert, env->clip.clip_mat);
 	normalize(env);
-    env->clip.vert = mult_matrix_f(env->clip.vert, env->clip.clip_mat);
     ft_putendl("Verts in clip space");
     print_matrix(env->clip.vert);
     ft_putstr("\n");
