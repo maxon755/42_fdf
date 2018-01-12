@@ -6,7 +6,7 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 10:01:01 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/11 14:20:45 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/12 12:54:34 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include "../libft/libft.h"
 # include "reader.h"
 # include "vector.h"
+# include "ft_X11.h"
 
 # define SCREEN_WIDTH	1024
 # define SCREEN_HEIGHT	768
@@ -66,6 +67,14 @@ typedef struct	s_camera
 {
 	t_matrix	vert;
 	t_matrix	look;
+	t_vector	eye;
+	t_vector	target;
+	t_vector	up_dir;
+
+	t_vector	forward;
+	t_vector	right;
+	t_vector	up;
+
 	float		near;
 	float		far;
 	float		fov_h;
@@ -110,8 +119,11 @@ t_matrix        rotate_about_z_center(t_matrix a, float z);
 t_matrix		rotate(t_env *env, float x_angle, float y_angle, float z_angle);
 
 void            init_camera(t_env *env);
+t_matrix		look_at(t_env *env, t_vector eye, t_vector target, t_vector up_dir);
+int				cam_trans(int keycode, t_env *env);
 
 void			init_clip(t_env *env);
+void			normalize(t_env *env);
 
 int				translations(int keycode, t_env *env);
 int				scalings(int keycode, t_env *env);

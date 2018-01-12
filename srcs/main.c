@@ -6,7 +6,7 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 16:10:16 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/12 09:17:57 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/12 10:10:00 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,11 @@ void	draw_f(t_env *env)
 int				expose_hook(t_env *env)
 {
 	mlx_clear_window(env->mlx, env->win);
+	env->camera.vert = mult_matrix(env->world.vert, env->camera.look);
+	env->clip.vert = mult_matrix(env->camera.vert, env->clip.clip_mat);
+    normalize(env);
+	env->view_port.vert = mult_matrix(env->clip.vert, env->view_port.morph);
 	//print_notations(env);
-	//env->center = get_center(env->map);
 	draw_figure(env);
 	return (0);
 }
@@ -41,9 +44,10 @@ int				key_hook(int keycode, t_env *env)
 {
 	if (keycode == 53)
 		exit(1);
-/*	if (keycode >= 123 && keycode <= 126)
-		translations(keycode, env);
-	if (keycode == 69 || keycode == 78 ||
+	if ((keycode >= 123 && keycode <= 126) ||
+		(keycode == 69 || keycode == 78))
+		cam_trans(keycode, env);
+/*	if (keycode == 69 || keycode == 78 ||
 		keycode == 24 || keycode == 27)
 		scalings(keycode, env);
 	if ((keycode >= 0 && keycode <= 2) ||

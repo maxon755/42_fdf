@@ -6,7 +6,7 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/10 08:52:55 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/11 17:44:45 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/12 12:56:02 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,39 +35,32 @@ static t_matrix	get_look_matrix(t_vector e, t_vector f, t_vector r, t_vector u)
 	return (m);
 }
 
-static t_matrix	look_at(t_vector eye, t_vector target, t_vector up_dir)
+t_matrix	look_at(t_env *env, t_vector eye, t_vector target, t_vector up_dir)
 {
-	t_vector forward;
-	t_vector right;
-	t_vector up;
 	t_matrix m;
 
-	forward = subtraction(eye, target);
-	//forward = k_mult(forward, -1);
-	forward = normalization(forward);
+	env->camera.forward = subtraction(eye, target);
+	env->camera.forward = normalization(env->camera.forward);
 	ft_putendl("forward vector");
-	print_vector(forward);
+	print_vector(env->camera.forward);
 	ft_putstr("\n");
-	right  = cross_production_left(up_dir, forward);
-	right = normalization(right);
+	env->camera.right  = cross_production_left(up_dir, env->camera.forward);
+	env->camera.right = normalization(env->camera.right);
 	ft_putendl("right vector");
-    print_vector(right);
+    print_vector(env->camera.right);
     ft_putstr("\n");	
-	up = cross_production_left(forward, right);
-	up = normalization(up);
+	env->camera.up = cross_production_left(env->camera.forward, env->camera.right);
+	env->camera.up = normalization(env->camera.up);
     ft_putendl("up vector");
-	print_vector(up);
+	print_vector(env->camera.up);
 	ft_putstr("\n");
-	m = get_look_matrix(eye, forward, right, up);
+	m = get_look_matrix(eye, env->camera.forward, env->camera.right, env->camera.up);
 	return (m);
 }
 
 void            init_camera(t_env *env)
 {
-    t_vector target;
-    t_vector eye;
-    t_vector up_dir;
-	t_vector amp;
+	t_vector	amp;
 	float		c;
 
     env->camera.near = 1;
@@ -77,9 +70,9 @@ void            init_camera(t_env *env)
 
 	printf("Camera angles:\nfov_h: %f\nfov_v: %f\n\n", RAD(env->camera.fov_h),
 		   RAD(env->camera.fov_v));
-    target = get_center(env->world.vert);
+    env->camera.target = get_center(env->world.vert);
 	ft_putendl("target vector");
-    print_vector(target);
+    print_vector(env->camera.target);
     ft_putstr("\n");
 
 
@@ -93,18 +86,20 @@ void            init_camera(t_env *env)
 		c = 1 / tan(env->camera.fov_h / 2) * amp.x + 5;
 	else if (amp.y > amp.x && amp.y > amp.z)
 		c = 1 / tan(env->camera.fov_v / 2) * amp.y + 5;
-	else // (amp.z > amp.x && amp.z > amp.y)
-		c = amp.z + 10;
-
-	eye = get_vector(0, 0, c);
+	else
+		c = amp.z + 10;	
+	env->camera.eye = get_vector(0, 0, c);
 	ft_putendl("eye vector");
-    print_vector(eye);
+    print_vector(env->camera.eye);
 	ft_putstr("\n");
-    up_dir = get_vector(0, -5, 0);
-    env->camera.look = look_at(eye, target, up_dir);
+    env->camera.up_dir = get_vector(0, -1, 0);
+
+    env->camera.look = look_at(env, env->camera.eye, env->camera.target,
+							   env->camera.up_dir);
 	ft_putendl("Look matrix");
     print_matrix(env->camera.look);
     ft_putstr("\n");
+
     ft_putendl("Result camera matrix");
     env->camera.vert = mult_matrix(env->world.vert, env->camera.look);
     print_matrix(env->camera.vert);
