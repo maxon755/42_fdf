@@ -6,7 +6,7 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 16:10:16 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/11 13:11:38 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/12 09:17:57 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ int				expose_hook(t_env *env)
 	draw_figure(env);
 	return (0);
 }
-/*
+
 int				key_hook(int keycode, t_env *env)
 {
 	if (keycode == 53)
 		exit(1);
-	if (keycode >= 123 && keycode <= 126)
+/*	if (keycode >= 123 && keycode <= 126)
 		translations(keycode, env);
 	if (keycode == 69 || keycode == 78 ||
 		keycode == 24 || keycode == 27)
@@ -52,22 +52,10 @@ int				key_hook(int keycode, t_env *env)
 	if (keycode >= 18 && keycode <= 21)
 		colors(keycode, env);
 	if (keycode == 6)
-		restore_view(env);
+	restore_view(env);*/
 	expose_hook(env);
 	return (0);
 }
-
-void			set_zero_pos(t_env *env)
-{
-	env->position.x = 0;
-	env->position.y = 0;
-	env->position.about_x = 0;
-	env->position.about_y = 0;
-	env->position.about_z = 0;
-	env->position.scale_x = 1;
-	env->position.scale_y = 1;
-	env->position.scale_z = 1;
-	}*/
 
 void			set_object_in_world(t_env *env)
 {
@@ -149,7 +137,7 @@ int			main(int argc, char **argv)
 	env->center = get_center(env->map);
 	init_figure(env);*/
 	mlx_expose_hook(env.win, expose_hook, &env);
-	//mlx_key_hook(env->win, key_hook, env);
+	mlx_key_hook(env.win, key_hook, &env);
 	mlx_loop(env.mlx);
 	return (0);
 }
