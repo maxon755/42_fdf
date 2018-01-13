@@ -40,7 +40,6 @@ t_vector	cross_production_right(t_vector a, t_vector b)
 	c.x = a.y * b.z - a.z * b.y;
 	c.y = a.z * b.x - a.x * b.z;
 	c.z = a.x * b.y - a.y * b.x;
-
 	return (c);
 }
 
@@ -51,32 +50,5 @@ t_vector	cross_production_left(t_vector a, t_vector b)
 	c.x = a.z * b.y - a.y * b.z;
 	c.y = a.x * b.z - a.z * b.x;
 	c.z = a.y * b.x - a.x * b.y;
-
 	return (c);
-}
-
-t_vector	k_mult(t_vector a, float k)
-{
-	t_vector b;
-
-	b.x = a.x * k;
-	b.y = a.y * k;
-	b.z = a.z * k;
-	return (b);
-}
-float		vector_len(t_vector a)
-{
-	return (pow(a.x * a.x + a.y * a.y + a.z * a.z, 0.5));
-}
-
-t_vector	normalization(t_vector a)
-{
-	t_vector n;
-	float len;
-
-	len = vector_len(a);;
-	n.x = a.x / len;
-	n.y = a.y / len;
-	n.z = a.z / len;
-	return (n);
 }

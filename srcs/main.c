@@ -6,20 +6,21 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 16:10:16 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/13 14:48:47 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/13 15:26:47 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-int				expose_hook(t_env *env)
+int		expose_hook(t_env *env)
 {
 	t_matrix temp;
+
 	mlx_clear_window(env->mlx, env->win);
 	temp = env->clip.vert;
 	env->clip.vert = mult_matrix(env->camera.vert, env->clip.clip_mat);
 	free_matrix(temp);
-    normalize(env);
+	normalize(env);
 	temp = env->view_port.vert;
 	env->view_port.vert = mult_matrix(env->clip.vert, env->view_port.morph);
 	free_matrix(temp);
@@ -28,7 +29,7 @@ int				expose_hook(t_env *env)
 	return (0);
 }
 
-int				key_hook(int keycode, t_env *env)
+int		key_hook(int keycode, t_env *env)
 {
 	if (keycode == 53)
 	{
@@ -42,20 +43,20 @@ int				key_hook(int keycode, t_env *env)
 		(keycode >= Q_KEY && keycode <= E_KEY))
 		cam_rotate(keycode, env);
 	if (keycode >= ONE_KEY && keycode <= FOUR_KEY)
-	colors(keycode, env);
+		colors(keycode, env);
 	expose_hook(env);
 	return (0);
 }
 
-void			set_object_in_world(t_env *env)
+void	set_object_in_world(t_env *env)
 {
 	t_vector c;
 	t_matrix mirr;
 
 	env->world.morph.rows = 4;
-    env->world.morph.cols = 4;
-    env->world.morph.values = get_identity_matrix(env->world.morph.rows,
-												  env->world.morph.cols);
+	env->world.morph.cols = 4;
+	env->world.morph.values = get_identity_matrix(env->world.morph.rows,
+										env->world.morph.cols);
 	c = get_center(env->obj.vert);
 	env->world.morph = translate(env->world.morph, -c.x, -c.y, -c.z);
 	mirr.rows = 4;
@@ -67,20 +68,20 @@ void			set_object_in_world(t_env *env)
 	free_matrix(mirr);
 }
 
-void		init_view_port(t_env *env)
+void	init_view_port(t_env *env)
 {
 	env->view_port.morph.rows = 4;
 	env->view_port.morph.cols = 4;
 	env->view_port.morph.values = get_identity_matrix(env->view_port.morph.rows,
 												env->view_port.morph.cols);
 	env->view_port.morph.values[0][0] = (SCREEN_WIDTH - 1) / 2;
-	env->view_port.morph.values[1][1] = - (SCREEN_HEIGHT - 1) / 2;
+	env->view_port.morph.values[1][1] = -(SCREEN_HEIGHT - 1) / 2;
 	env->view_port.morph.values[3][0] = (SCREEN_WIDTH - 1) / 2;
 	env->view_port.morph.values[3][1] = (SCREEN_HEIGHT - 1) / 2;
 	env->view_port.vert = mult_matrix(env->clip.vert, env->view_port.morph);
 }
 
-int			main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
 	t_env env;
 
@@ -91,7 +92,7 @@ int			main(int argc, char **argv)
 	}
 	env.mlx = mlx_init();
 	env.win = mlx_new_window(env.mlx, SCREEN_WIDTH, SCREEN_HEIGHT,
-							 ft_strjoin("FdF mgayduk", argv[1]));
+						ft_strjoin("FdF mgayduk", argv[1]));
 	env.obj = parse_content(get_content(argv[1]));
 	set_object_in_world(&env);
 	init_camera(&env);

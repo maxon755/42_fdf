@@ -6,7 +6,7 @@
 #    By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/28 08:37:35 by mgayduk           #+#    #+#              #
-#    Updated: 2018/01/13 11:31:09 by mgayduk          ###   ########.fr        #
+#    Updated: 2018/01/13 15:15:04 by mgayduk          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -38,6 +38,7 @@ SRC :=	main.c 		        \
 		matrix2.c			\
 		matrix3.c			\
 		vector.c			\
+		vector2.c			\
 		camera.c			\
 		camera_control.c	\
 		clip.c				\

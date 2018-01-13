@@ -12,8 +12,6 @@
 
 #include "../includes/fdf.h"
 
-#include <stdio.h>
-
 static void			init_vars(t_point *delta, t_point *sign,
 								t_point s, t_point e)
 {
@@ -89,8 +87,8 @@ int					draw_line(t_env *env, size_t start, size_t end)
 	while (s.x != e.x || s.y != e.y)
 	{
 		mlx_pixel_put(env->mlx, env->win, s.x, s.y,
-					  get_color(env, start, end,
-					  get_param(env, start, s, delta)));
+					get_color(env, start, end,
+					get_param(env, start, s, delta)));
 		error.y = error.x * 2;
 		compute(&s, &error, delta, sign);
 	}
