@@ -6,7 +6,7 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 16:10:16 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/13 11:08:30 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/13 12:48:40 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ int				key_hook(int keycode, t_env *env)
 	if ((keycode >= A_KEY && keycode <= D_KEY) ||
 		(keycode >= Q_KEY && keycode <= E_KEY))
 		cam_rotate(keycode, env);
-/*	if (keycode >= 18 && keycode <= 21)
+	if (keycode >= ONE_KEY && keycode <= FOUR_KEY)
 		colors(keycode, env);
-	if (keycode == 6)
+/*	if (keycode == 6)
 	restore_view(env);*/
 	expose_hook(env);
 	return (0);

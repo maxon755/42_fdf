@@ -6,7 +6,7 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 10:34:40 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/11 11:44:54 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/13 12:53:57 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void			init_vars(t_point *delta, t_point *sign,
 	sign->x = s.x < e.x ? 1 : -1;
 	sign->y = s.y < e.y ? 1 : -1;
 }
-/*
+
 static long long	get_color(t_env *env, size_t start, size_t end, float t)
 {
 	long long color;
@@ -30,15 +30,15 @@ static long long	get_color(t_env *env, size_t start, size_t end, float t)
 	long long green;
 	long long blue;
 
-	red = ((env->colors[start] & 0xff0000) +
-	(((env->colors[end] & 0xff0000) -
-	(env->colors[start] & 0xff0000)) * t));
-	green = ((env->colors[start] & 0x00ff00) +
-	(((env->colors[end] & 0x00ff00) -
-	(env->colors[start] & 0x00ff00)) * t));
-	blue = (env->colors[start] & 0x0000ff) +
-		((env->colors[end] & 0x0000ff) -
-		(env->colors[start] & 0x0000ff)) * t;
+	red = ((env->obj.colors[start] & 0xff0000) +
+	(((env->obj.colors[end] & 0xff0000) -
+	(env->obj.colors[start] & 0xff0000)) * t));
+	green = ((env->obj.colors[start] & 0x00ff00) +
+	(((env->obj.colors[end] & 0x00ff00) -
+	(env->obj.colors[start] & 0x00ff00)) * t));
+	blue = (env->obj.colors[start] & 0x0000ff) +
+		((env->obj.colors[end] & 0x0000ff) -
+		(env->obj.colors[start] & 0x0000ff)) * t;
 	color = (red & 0xff0000) + (green & 0x00ff00) + (blue & 0x0000ff);
 	return (color);
 }
@@ -50,12 +50,12 @@ static float		get_param(t_env *env, size_t start,
 	float numer;
 	float denom;
 
-	numer = pow(pow(s.x - env->map.values[start][0], 2) +
-				pow(s.y - env->map.values[start][1], 2), 0.5);
+	numer = pow(pow(s.x - env->view_port.vert.values[start][0], 2) +
+				pow(s.y - env->view_port.vert.values[start][1], 2), 0.5);
 	denom = pow(pow(delta.x, 2) + pow(delta.y, 2), 0.5);
 	t = numer / denom;
 	return (t);
-}*/
+}
 
 static void			compute(t_point *s, t_point *error,
 							t_point delta, t_point sign)
@@ -88,9 +88,9 @@ int					draw_line(t_env *env, size_t start, size_t end)
 	error.x = delta.x - delta.y;
 	while (s.x != e.x || s.y != e.y)
 	{
-		mlx_pixel_put(env->mlx, env->win, s.x, s.y, 0xffffff);
-					  //get_color(env, start, end,
-					  //get_param(env, start, s, delta)));
+		mlx_pixel_put(env->mlx, env->win, s.x, s.y,
+					  get_color(env, start, end,
+					  get_param(env, start, s, delta)));
 		error.y = error.x * 2;
 		compute(&s, &error, delta, sign);
 	}

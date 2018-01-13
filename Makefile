@@ -6,7 +6,7 @@
 #    By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/28 08:37:35 by mgayduk           #+#    #+#              #
-#    Updated: 2018/01/12 09:38:56 by mgayduk          ###   ########.fr        #
+#    Updated: 2018/01/13 11:31:09 by mgayduk          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -44,7 +44,8 @@ SRC :=	main.c 		        \
 		transformations.c	\
 		helpers.c			\
 		drawer.c			\
-		primitives.c		
+		primitives.c		\
+		colors.c
 
 # Object files
 OBJ := $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
