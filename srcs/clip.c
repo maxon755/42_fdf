@@ -6,7 +6,7 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/10 13:05:00 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/11 15:26:04 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/13 14:46:07 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ static void	init_corners(t_env *env)
     env->clip.left = -env->clip.right;
     env->clip.top = tan(env->camera.fov_v / 2) * env->camera.near;
     env->clip.bottom = -env->clip.top;
-    printf("Projection plane coordinates\ntop: %f\nbottom: %f\nright: %f\nleft: %f\n\n",
-           env->clip.top, env->clip.bottom, env->clip.right, env->clip.left);
 }
 
 static void	init_clip_mat(t_env *env)
@@ -42,22 +40,6 @@ static void	init_clip_mat(t_env *env)
     env->clip.clip_mat.values[2][2] = (f + n) / (f - n);
     env->clip.clip_mat.values[3][2] = - (2 * n * f) / (f - n);
     env->clip.clip_mat.values[2][3] = 1;
-    ft_putendl("Clip matrix");
-    print_matrix(env->clip.clip_mat);
-    ft_putstr("\n");
-}
-
-void replace_z(t_env *env)
-{
-	size_t i;
-
-	env->clip.vert = dup_matrix(env->camera.vert);
-	i = 0;
-	while (i < env->clip.vert.rows)
-	{
-		env->clip.vert.values[i][3] = env->clip.vert.values[i][2];
-		i++;
-	}
 }
 
 void	normalize(t_env *env)
@@ -77,13 +59,9 @@ void	normalize(t_env *env)
 
 void		init_clip(t_env *env)
 {
-	//replace_z(env);
     init_corners(env);
     init_clip_mat(env);
 
     env->clip.vert = mult_matrix(env->camera.vert, env->clip.clip_mat);
 	normalize(env);
-    ft_putendl("Verts in clip space");
-    print_matrix(env->clip.vert);
-    ft_putstr("\n");
 }

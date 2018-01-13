@@ -6,7 +6,7 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 16:10:16 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/13 14:32:38 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/13 14:42:47 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int				key_hook(int keycode, t_env *env)
 		system("leaks fdf");
 		exit(1);
 	}
-	if ((keycode >= LEFT_ARROR_KEY && keycode <= UP_ARROR_KEY) ||
+	if ((keycode >= LEFT_ARROW_KEY && keycode <= UP_ARROW_KEY) ||
 		(keycode == PLUS_NUM_KEY || keycode == MINUS_NUM_KEY))
 		cam_trans(keycode, env);
 	if ((keycode >= A_KEY && keycode <= D_KEY) ||

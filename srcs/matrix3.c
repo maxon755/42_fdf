@@ -6,11 +6,9 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/09 12:05:03 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/13 09:03:58 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/13 14:41:34 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdio.h>
 
 #include "../includes/matrix.h"
 
@@ -58,13 +56,11 @@ void		print_matrix(t_matrix m)
 		j = 0;
 		while (j < m.cols)
 		{
-			printf("%.2f ", m.values[i][j]);
-			//ft_putnbr(m.values[i][j]);
-			//ft_putchar(' ');
+			ft_putnbr(m.values[i][j]);
+			ft_putchar(' ');
 			j++;
 		}
-		//ft_putchar('\n');
-		printf("\n");
+		ft_putchar('\n');
 		i++;
 	}
 }

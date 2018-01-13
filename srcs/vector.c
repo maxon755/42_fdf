@@ -6,11 +6,10 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/09 15:38:15 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/12 09:57:37 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/13 14:43:48 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "../includes/vector.h"
 #include "../includes/fdf.h"
 
 t_vector	get_vector(float x, float y, float z)
@@ -80,9 +79,4 @@ t_vector	normalization(t_vector a)
 	n.y = a.y / len;
 	n.z = a.z / len;
 	return (n);
-}
-
-void		print_vector(t_vector a)
-{
-	printf("x: %.3f\ny: %.3f\nz: %.3f\nw: %.3f\n", a.x, a.y, a.z, a.w);
 }

@@ -6,7 +6,7 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/10 08:52:55 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/12 12:56:02 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/13 14:46:46 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,10 @@ t_matrix	look_at(t_env *env, t_vector eye, t_vector target, t_vector up_dir)
 
 	env->camera.forward = subtraction(eye, target);
 	env->camera.forward = normalization(env->camera.forward);
-	ft_putendl("forward vector");
-	print_vector(env->camera.forward);
-	ft_putstr("\n");
 	env->camera.right  = cross_production_left(up_dir, env->camera.forward);
 	env->camera.right = normalization(env->camera.right);
-	ft_putendl("right vector");
-    print_vector(env->camera.right);
-    ft_putstr("\n");	
 	env->camera.up = cross_production_left(env->camera.forward, env->camera.right);
 	env->camera.up = normalization(env->camera.up);
-    ft_putendl("up vector");
-	print_vector(env->camera.up);
-	ft_putstr("\n");
 	m = get_look_matrix(eye, env->camera.forward, env->camera.right, env->camera.up);
 	return (m);
 }
@@ -67,21 +58,8 @@ void            init_camera(t_env *env)
     env->camera.far = 10;
     env->camera.fov_h = DEG(90);
     env->camera.fov_v = env->camera.fov_h * SCREEN_HEIGHT / SCREEN_WIDTH;
-
-	printf("Camera angles:\nfov_h: %f\nfov_v: %f\n\n", RAD(env->camera.fov_h),
-		   RAD(env->camera.fov_v));
     env->camera.target = get_center(env->world.vert);
-	ft_putendl("target vector");
-    print_vector(env->camera.target);
-    ft_putstr("\n");
-
-
-
 	amp = get_amp(env->world.vert);
-	ft_putendl("Amp vector");
-	print_vector(amp);
-	ft_putstr("\n");
-
 	if (amp.x > amp.y && amp.x > amp.z)
 		c = 1 / tan(env->camera.fov_h / 2) * amp.x + 5;
 	else if (amp.y > amp.x && amp.y > amp.z)
@@ -89,20 +67,8 @@ void            init_camera(t_env *env)
 	else
 		c = amp.z + 10;	
 	env->camera.eye = get_vector(0, 0, c);
-	ft_putendl("eye vector");
-    print_vector(env->camera.eye);
-	ft_putstr("\n");
     env->camera.up_dir = get_vector(0, -1, 0);
-
     env->camera.look = look_at(env, env->camera.eye, env->camera.target,
 							   env->camera.up_dir);
-	ft_putendl("Look matrix");
-    print_matrix(env->camera.look);
-    ft_putstr("\n");
-
-    ft_putendl("Result camera matrix");
     env->camera.vert = mult_matrix(env->world.vert, env->camera.look);
-    print_matrix(env->camera.vert);
-    ft_putstr("\n");
-
 }
