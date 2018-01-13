@@ -6,7 +6,7 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 16:10:16 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/13 13:01:45 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/13 13:20:36 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,16 @@
 
 int				expose_hook(t_env *env)
 {
+	t_matrix temp;
 	mlx_clear_window(env->mlx, env->win);
-	//env->camera.vert = mult_matrix(env->world.vert, env->camera.look);
+	///env->camera.vert = mult_matrix(env->world.vert, env->camera.look);
+	temp = env->clip.vert;
 	env->clip.vert = mult_matrix(env->camera.vert, env->clip.clip_mat);
+	free_matrix(temp);
     normalize(env);
+	temp = env->view_port.vert;
 	env->view_port.vert = mult_matrix(env->clip.vert, env->view_port.morph);
+	free_matrix(temp);
 	//print_notations(env);
 	draw_figure(env);
 	return (0);
@@ -27,18 +32,18 @@ int				expose_hook(t_env *env)
 int				key_hook(int keycode, t_env *env)
 {
 	if (keycode == 53)
+	{
+		system("leaks fdf");
 		exit(1);
+	}
 	if ((keycode >= LEFT_ARROR_KEY && keycode <= UP_ARROR_KEY) ||
 		(keycode == PLUS_NUM_KEY || keycode == MINUS_NUM_KEY))
 		cam_trans(keycode, env);
-/*	if (keycode == 69 || keycode == 78 ||
-		keycode == 24 || keycode == 27)
-		scalings(keycode, env);*/
 	if ((keycode >= A_KEY && keycode <= D_KEY) ||
 		(keycode >= Q_KEY && keycode <= E_KEY))
 		cam_rotate(keycode, env);
 	if (keycode >= ONE_KEY && keycode <= FOUR_KEY)
-		colors(keycode, env);
+	colors(keycode, env);
 /*	if (keycode == 6)
 	restore_view(env);*/
 	expose_hook(env);
@@ -102,7 +107,8 @@ int			main(int argc, char **argv)
 		return (0);
 	}
 	env.mlx = mlx_init();
-	env.win = mlx_new_window(env.mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "FdF mgayduk");
+	env.win = mlx_new_window(env.mlx, SCREEN_WIDTH, SCREEN_HEIGHT,
+							 ft_strjoin("FdF mgayduk", argv[1]));
 	env.obj = parse_content(get_content(argv[1]));
 
 	ft_putendl("origin model");
@@ -115,7 +121,7 @@ int			main(int argc, char **argv)
 	init_clip(&env);
 	init_view_port(&env);
 
-	system("leaks fdf");
+	//system("leaks fdf");
 	mlx_expose_hook(env.win, expose_hook, &env);
 	mlx_hook(env.win, 2, 5, key_hook, &env);
 	mlx_loop(env.mlx);
