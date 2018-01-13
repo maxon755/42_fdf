@@ -6,7 +6,7 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/26 18:15:50 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/11 18:07:23 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/13 13:46:21 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int			restore_view(t_env *env)
 	init_figure(env);
 	return (0);
 }*/
-/*
+
 void		print_notations(t_env *env)
 {
 	mlx_string_put(env->mlx, env->win, NX_P, NY_P, N_COLOR,
@@ -79,14 +79,12 @@ void		print_notations(t_env *env)
 	mlx_string_put(env->mlx, env->win, NX_P, 4 * NY_P, N_COLOR,
 			"zoom out   : -");
 	mlx_string_put(env->mlx, env->win, NX_P, 6 * NY_P, N_COLOR,
-			"z rotation : a, d");
+			"x rotation : w, s");
 	mlx_string_put(env->mlx, env->win, NX_P, 7 * NY_P, N_COLOR,
 			"y rotation : q, e");
 	mlx_string_put(env->mlx, env->win, NX_P, 8 * NY_P, N_COLOR,
-			"x rotation : w, s");
+			"z rotation : a, d");
 	mlx_string_put(env->mlx, env->win, NX_P, 10 * NY_P, N_COLOR,
-			"restore view : z");
-	mlx_string_put(env->mlx, env->win, NX_P, 12 * NY_P, N_COLOR,
 			"change color : 1 - 4");
 }
-*/
+
