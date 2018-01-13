@@ -6,7 +6,7 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 16:10:16 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/13 12:48:40 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/13 13:01:45 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,31 +48,28 @@ int				key_hook(int keycode, t_env *env)
 void			set_object_in_world(t_env *env)
 {
 	t_vector c;
+	t_matrix mirr;
 
 	env->world.morph.rows = 4;
     env->world.morph.cols = 4;
     env->world.morph.values = get_identity_matrix(env->world.morph.rows,
 												  env->world.morph.cols);
 	c = get_center(env->obj.vert);
-	env->world.morph = rotate_about_y_center(env->world.morph, DEG(0));
-
 	env->world.morph = translate(env->world.morph, -c.x, -c.y, -c.z);
 	
     ft_putendl("Morph world matrix 1");
     print_matrix(env->world.morph);
     ft_putstr("\n");
 
-	t_matrix mirr;
 	mirr.rows = 4;
 	mirr.cols = 4;
 	mirr.values = get_identity_matrix(mirr.rows, mirr.cols);
 	mirr.values[0][0] = -1;
 
-	env->world.morph = mult_matrix(env->world.morph, mirr);
-	
+	env->world.morph = mult_matrix_f(env->world.morph, mirr);
 	env->world.vert = mult_matrix(env->obj.vert, env->world.morph);
 
-	//free_matrix(t);
+	free_matrix(mirr);
 	ft_putendl("model in the world");
 	print_matrix(env->world.vert);
 	ft_putstr("\n");
@@ -105,8 +102,7 @@ int			main(int argc, char **argv)
 		return (0);
 	}
 	env.mlx = mlx_init();
-	env.win = mlx_new_window(env.mlx, SCREEN_WIDTH, SCREEN_HEIGHT,
-							ft_strjoin("FdF mgayduk - ", argv[1]));
+	env.win = mlx_new_window(env.mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "FdF mgayduk");
 	env.obj = parse_content(get_content(argv[1]));
 
 	ft_putendl("origin model");
@@ -119,11 +115,7 @@ int			main(int argc, char **argv)
 	init_clip(&env);
 	init_view_port(&env);
 
-	//system("leaks fdf");
-	/*set_zero_pos(env);
-	env->map = dup_matrix(env->init_map);
-	env->center = get_center(env->map);
-	init_figure(env);*/
+	system("leaks fdf");
 	mlx_expose_hook(env.win, expose_hook, &env);
 	mlx_hook(env.win, 2, 5, key_hook, &env);
 	mlx_loop(env.mlx);
