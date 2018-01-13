@@ -6,7 +6,7 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 09:29:07 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/12 10:10:55 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/12 13:11:45 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,12 @@
 
 # define PLUS_NUM_KEY		69
 # define MINUS_NUM_KEY		78
+
+# define A_KEY				0
+# define S_KEY				1
+# define D_KEY				2
+# define Q_KEY				12
+# define W_KEY				13
+# define E_KEY				14
 
 #endif
