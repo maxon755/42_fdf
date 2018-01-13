@@ -6,27 +6,11 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 16:10:16 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/13 08:48:14 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/13 11:08:30 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-
-#include <stdio.h>
-
-
-void	draw_f(t_env *env)
-{
-	size_t i;
-
-	i = 0;
-	while (i < env->view_port.vert.rows)
-	{
-		mlx_pixel_put(env->mlx, env->win, env->view_port.vert.values[i][0],
-					  env->view_port.vert.values[i][1], 0xffffff);
-		i++;
-	}
-}
 
 int				expose_hook(t_env *env)
 {
@@ -141,7 +125,7 @@ int			main(int argc, char **argv)
 	env->center = get_center(env->map);
 	init_figure(env);*/
 	mlx_expose_hook(env.win, expose_hook, &env);
-	mlx_key_hook(env.win, key_hook, &env);
+	mlx_hook(env.win, 2, 5, key_hook, &env);
 	mlx_loop(env.mlx);
 	return (0);
 }
