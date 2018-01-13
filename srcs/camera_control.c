@@ -6,7 +6,7 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 09:33:07 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/13 13:48:20 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/13 15:07:37 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	cam_trans(int keycode, t_env *env)
 	if (keycode == PLUS_NUM_KEY)
 		env->camera.vert = translate(env->camera.vert, 0, 0, -1);
 	if (keycode == MINUS_NUM_KEY)
-	env->camera.vert = translate(env->camera.vert, 0, 0, 1);
+		env->camera.vert = translate(env->camera.vert, 0, 0, 1);
 	return (0);
 }
 
