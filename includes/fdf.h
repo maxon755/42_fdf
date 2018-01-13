@@ -6,7 +6,7 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 10:01:01 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/13 14:41:06 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/13 15:00:12 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ t_vector		get_mean(t_matrix m);
 t_vector		get_center(t_matrix m);
 t_vector		get_amp(t_matrix m);
 int				restore_view(t_env *env);
-void			init_figure(t_env *env);
 t_object		parse_content(t_list *head);
 void			draw_figure(t_env *env);
 void			print_notations(t_env *env);
@@ -117,7 +116,6 @@ t_matrix        rotate_about_z_center(t_matrix a, float z);
 t_matrix		rotate(t_matrix a, float x_angle, float y_angle, float z_angle);
 
 void            init_camera(t_env *env);
-t_matrix		look_at(t_env *env, t_vector eye, t_vector target, t_vector up_dir);
 int				cam_trans(int keycode, t_env *env);
 int				cam_rotate(int keycode, t_env *env);
 

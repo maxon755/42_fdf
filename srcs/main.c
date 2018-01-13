@@ -6,7 +6,7 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 16:10:16 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/13 14:42:47 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/13 14:48:47 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,23 +58,13 @@ void			set_object_in_world(t_env *env)
 												  env->world.morph.cols);
 	c = get_center(env->obj.vert);
 	env->world.morph = translate(env->world.morph, -c.x, -c.y, -c.z);
-	
-    ft_putendl("Morph world matrix 1");
-    print_matrix(env->world.morph);
-    ft_putstr("\n");
-
 	mirr.rows = 4;
 	mirr.cols = 4;
 	mirr.values = get_identity_matrix(mirr.rows, mirr.cols);
 	mirr.values[0][0] = -1;
-
 	env->world.morph = mult_matrix_f(env->world.morph, mirr);
 	env->world.vert = mult_matrix(env->obj.vert, env->world.morph);
-
 	free_matrix(mirr);
-	ft_putendl("model in the world");
-	print_matrix(env->world.vert);
-	ft_putstr("\n");
 }
 
 void		init_view_port(t_env *env)
@@ -88,10 +78,6 @@ void		init_view_port(t_env *env)
 	env->view_port.morph.values[3][0] = (SCREEN_WIDTH - 1) / 2;
 	env->view_port.morph.values[3][1] = (SCREEN_HEIGHT - 1) / 2;
 	env->view_port.vert = mult_matrix(env->clip.vert, env->view_port.morph);
-	ft_putendl("view port matrix");
-	print_matrix(env->view_port.vert);
-	ft_putstr("\n");
-
 }
 
 int			main(int argc, char **argv)
@@ -107,18 +93,10 @@ int			main(int argc, char **argv)
 	env.win = mlx_new_window(env.mlx, SCREEN_WIDTH, SCREEN_HEIGHT,
 							 ft_strjoin("FdF mgayduk", argv[1]));
 	env.obj = parse_content(get_content(argv[1]));
-
-	ft_putendl("origin model");
-	print_matrix(env.obj.vert);
-	ft_putstr("\n");
-
 	set_object_in_world(&env);
 	init_camera(&env);
-
 	init_clip(&env);
 	init_view_port(&env);
-
-	//system("leaks fdf");
 	mlx_expose_hook(env.win, expose_hook, &env);
 	mlx_hook(env.win, 2, 5, key_hook, &env);
 	mlx_loop(env.mlx);
