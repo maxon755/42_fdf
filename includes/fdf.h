@@ -6,7 +6,7 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 10:01:01 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/12 15:59:19 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/13 08:44:57 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ t_matrix        rotate_about_x_center(t_matrix a, float x);
 t_matrix        rotate_about_y_center(t_matrix a, float y);
 t_matrix        rotate_about_z_center(t_matrix a, float z);
 
-t_matrix		rotate(t_env *env, float x_angle, float y_angle, float z_angle);
+t_matrix		rotate(t_matrix a, float x_angle, float y_angle, float z_angle);
 
 void            init_camera(t_env *env);
 t_matrix		look_at(t_env *env, t_vector eye, t_vector target, t_vector up_dir);

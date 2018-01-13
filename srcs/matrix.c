@@ -6,7 +6,7 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/25 13:50:31 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/09 12:11:09 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/13 09:00:15 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,4 +107,3 @@ t_matrix	mult_matrix_f(t_matrix a, t_matrix b)
 	free_matrix(temp);
 	return (c);
 }
-

@@ -6,7 +6,7 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/26 08:48:58 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/09 12:16:46 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/13 08:58:45 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,36 +101,3 @@ t_matrix	rotate_about_z_center(t_matrix a, float z)
 	free_matrix(t_b);
 	return (a);
 }
-/*
-static t_matrix	get_rotation_matrix(float x, float y, float z)
-{
-	t_matrix rx;
-	t_matrix ry;
-	t_matrix rz;
-
-	rx = get_x_rot_matrix(x);
-	ry = get_y_rot_matrix(y);
-	rz = get_z_rot_matrix(z);
-	rx = mult_matrix(rx, ry);
-	rx = mult_matrix(rx, rz);
-	return (rx);
-}
-
-int				rotate(t_env *env, float x_angle, float y_angle, float z_angle)
-{
-	t_matrix	t;
-	t_matrix	t_b;
-	t_matrix	r;
-	t_vector	c;
-
-	c = get_center(env->map);
-	t = get_translation_matrix(-c.x, -c.y, -c.z);
-	t_b = get_translation_matrix(c.x, c.y, c.z);
-	r = get_rotation_matrix(x_angle, y_angle, z_angle);
-	t = mult_matrix(t, r);
-	t = mult_matrix(t, t_b);
-	env->map = mult_matrix(env->map, t);
-	free_matrix(t);
-	return (0);
-}
-*/
