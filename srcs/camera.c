@@ -6,7 +6,7 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/10 08:52:55 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/14 15:35:21 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/14 19:02:54 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static t_matrix	get_look_matrix(t_vector e, t_vector f, t_vector r, t_vector u)
 	return (m);
 }
 
-static t_matrix	look_at(t_env *env, t_vector eye,
+t_matrix	look_at(t_env *env, t_vector eye,
 						t_vector target, t_vector up_dir)
 {
 	t_matrix m;
@@ -52,15 +52,14 @@ static t_matrix	look_at(t_env *env, t_vector eye,
 	return (m);
 }
 
-static void		init_steps(t_vector amp, t_env *env)
+static void		init_steps(t_env *env)
 {
-	env->camera.xy_step = amp.x / 10;
-	env->camera.z_step = amp.z / 10;
+	env->camera.xy_step = env->obj.amp.x / 10;
+	env->camera.z_step = env->obj.amp.z / 10;
 }
 
 void			init_camera(t_env *env)
 {
-	t_vector	amp;
 	float		c;
 
 	env->camera.near = 1;
@@ -68,14 +67,13 @@ void			init_camera(t_env *env)
 	env->camera.fov_h = DEG(90);
 	env->camera.fov_v = env->camera.fov_h * SCREEN_HEIGHT / SCREEN_WIDTH;
 	env->camera.target = get_center(env->world.vert);
-	amp = get_amp(env->world.vert);
-	init_steps(amp, env);
-	if (amp.x >= amp.y && amp.x >= amp.z)
-		c = 1 / tan(env->camera.fov_h / 2) * amp.x + 5;
-	else if (amp.y >= amp.x && amp.y >= amp.z)
-		c = 1 / tan(env->camera.fov_v / 2) * amp.y + 5;
+	init_steps(env);
+	if (env->obj.amp.x >= env->obj.amp.y && env->obj.amp.x >= env->obj.amp.z)
+		c = 1 / tan(env->camera.fov_h / 2) * env->obj.amp.x + 5;
+	else if (env->obj.amp.y >= env->obj.amp.x && env->obj.amp.y >= env->obj.amp.z)
+		c = 1 / tan(env->camera.fov_v / 2) * env->obj.amp.y + 5;
 	else
-		c = amp.z + 10;
+		c = env->obj.amp.z + 10;
 	env->camera.eye = get_vector(0, 0, c);
 	env->camera.up_dir = get_vector(0, -1, 0);
 	env->camera.look = look_at(env, env->camera.eye, env->camera.target,

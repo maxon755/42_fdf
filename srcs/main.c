@@ -6,7 +6,7 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 16:10:16 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/14 15:48:57 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/14 19:21:08 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int		key_hook(int keycode, t_env *env)
 		cam_rotate(keycode, env);
 	if (keycode >= ONE_KEY && keycode <= FOUR_KEY)
 		colors(keycode, env);
-	if (keycode == P_KEY || keycode == O_KEY)
+	if (keycode == P_KEY || keycode == O_KEY || keycode == I_KEY)
 		deformations(keycode, env);
 	expose_hook(env);
 	return (0);
@@ -102,6 +102,7 @@ int		main(int argc, char **argv)
 	env.win = mlx_new_window(env.mlx, SCREEN_WIDTH, SCREEN_HEIGHT,
 						ft_strjoin("FdF mgayduk", argv[1]));
 	env.obj = parse_content(get_content(argv[1]));
+	env.obj.amp = get_amp(env.obj.vert);
 	set_object_in_world(&env);
 	init_camera(&env);
 	init_clip(&env);
