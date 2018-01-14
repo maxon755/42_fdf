@@ -6,7 +6,7 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 16:10:16 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/13 15:26:47 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/14 15:48:57 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@ int		expose_hook(t_env *env)
 	t_matrix temp;
 
 	mlx_clear_window(env->mlx, env->win);
+	temp = env->world.vert;
+	env->world.vert = mult_matrix(env->obj.vert, env->world.morph);	
+	free_matrix(temp);
+	temp = env->camera.vert;
+	env->camera.vert = mult_matrix(env->world.vert, env->camera.look);
+	free_matrix(temp);
 	temp = env->clip.vert;
 	env->clip.vert = mult_matrix(env->camera.vert, env->clip.clip_mat);
 	free_matrix(temp);
@@ -44,6 +50,8 @@ int		key_hook(int keycode, t_env *env)
 		cam_rotate(keycode, env);
 	if (keycode >= ONE_KEY && keycode <= FOUR_KEY)
 		colors(keycode, env);
+	if (keycode == P_KEY || keycode == O_KEY)
+		deformations(keycode, env);
 	expose_hook(env);
 	return (0);
 }

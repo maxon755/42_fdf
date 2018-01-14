@@ -6,7 +6,7 @@
 #    By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/28 08:37:35 by mgayduk           #+#    #+#              #
-#    Updated: 2018/01/13 15:15:04 by mgayduk          ###   ########.fr        #
+#    Updated: 2018/01/14 15:41:53 by mgayduk          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -46,7 +46,8 @@ SRC :=	main.c 		        \
 		helpers.c			\
 		drawer.c			\
 		primitives.c		\
-		colors.c
+		colors.c			\
+		model_deformation.c
 
 # Object files
 OBJ := $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))

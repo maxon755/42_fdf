@@ -6,7 +6,7 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 10:01:01 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/14 15:03:21 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/14 15:41:05 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,6 @@ t_matrix		rotate_about_x_center(t_matrix a, float x);
 t_matrix		rotate_about_y_center(t_matrix a, float y);
 t_matrix		rotate_about_z_center(t_matrix a, float z);
 
-t_matrix		rotate(t_matrix a, float x_angle, float y_angle, float z_angle);
-
 void			init_camera(t_env *env);
 int				cam_trans(int keycode, t_env *env);
 int				cam_rotate(int keycode, t_env *env);
@@ -124,10 +122,8 @@ int				cam_rotate(int keycode, t_env *env);
 void			init_clip(t_env *env);
 void			normalize(t_env *env);
 
-int				translations(int keycode, t_env *env);
-int				scalings(int keycode, t_env *env);
-int				rotations(int keycode, t_env *env);
-
 int				colors(int keycode, t_env *env);
+
+int				deformations(int keycode, t_env *env);
 
 #endif
