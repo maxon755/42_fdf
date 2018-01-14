@@ -6,7 +6,7 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/10 08:52:55 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/13 15:05:03 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/14 13:05:02 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ void			init_camera(t_env *env)
 	env->camera.fov_v = env->camera.fov_h * SCREEN_HEIGHT / SCREEN_WIDTH;
 	env->camera.target = get_center(env->world.vert);
 	amp = get_amp(env->world.vert);
-	if (amp.x > amp.y && amp.x > amp.z)
+	if (amp.x >= amp.y && amp.x >= amp.z)
 		c = 1 / tan(env->camera.fov_h / 2) * amp.x + 5;
-	else if (amp.y > amp.x && amp.y > amp.z)
+	else if (amp.y >= amp.x && amp.y >= amp.z)
 		c = 1 / tan(env->camera.fov_v / 2) * amp.y + 5;
 	else
 		c = amp.z + 10;
