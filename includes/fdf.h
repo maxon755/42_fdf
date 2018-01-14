@@ -6,7 +6,7 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 10:01:01 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/14 12:27:09 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/14 15:03:21 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,7 @@
 # define N_WIDTH		100
 # define NX_P			20
 # define NY_P			20
-# define T_STEP			50
-# define S_FACTOR 		1.2
-# define ALPHA 			DEG(10)
+# define R_STEP 		DEG(10)
 
 # define DEG(x)			(x * 3.14) / 180
 # define RAD(x)			(x * 180) / 3.14
@@ -71,6 +69,8 @@ typedef struct	s_camera
 	t_vector	target;
 	t_vector	up_dir;
 
+	float		xy_step;
+	float		z_step;
 	t_vector	forward;
 	t_vector	right;
 	t_vector	up;
