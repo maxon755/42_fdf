@@ -6,7 +6,7 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 09:37:23 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/09 10:18:38 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/14 12:28:43 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ t_list			*get_content(char *filename)
 	fd = open(filename, O_RDONLY, 0);
 	if (fd == -1)
 	{
-		ft_putendl("File doesn`t exist");
+		perror("Error");
 		exit(1);
 	}
 	head = read_file(fd);
