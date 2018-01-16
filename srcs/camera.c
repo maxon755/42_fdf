@@ -6,7 +6,7 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/10 08:52:55 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/14 19:02:54 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/16 11:14:01 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static t_matrix	get_look_matrix(t_vector e, t_vector f, t_vector r, t_vector u)
 	return (m);
 }
 
-t_matrix	look_at(t_env *env, t_vector eye,
+static t_matrix	look_at(t_env *env, t_vector eye,
 						t_vector target, t_vector up_dir)
 {
 	t_matrix m;
@@ -70,7 +70,8 @@ void			init_camera(t_env *env)
 	init_steps(env);
 	if (env->obj.amp.x >= env->obj.amp.y && env->obj.amp.x >= env->obj.amp.z)
 		c = 1 / tan(env->camera.fov_h / 2) * env->obj.amp.x + 5;
-	else if (env->obj.amp.y >= env->obj.amp.x && env->obj.amp.y >= env->obj.amp.z)
+	else if (env->obj.amp.y >= env->obj.amp.x &&
+		env->obj.amp.y >= env->obj.amp.z)
 		c = 1 / tan(env->camera.fov_v / 2) * env->obj.amp.y + 5;
 	else
 		c = env->obj.amp.z + 10;

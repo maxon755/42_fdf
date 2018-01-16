@@ -6,7 +6,7 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 10:01:01 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/14 18:58:10 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/16 11:22:03 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ typedef struct	s_object
 	t_matrix	vert;
 	t_matrix	morph;
 	t_vector	amp;
+	char		*is_pushed;
 	long long	*colors;
 	size_t		*p_in_row;
 }				t_object;
@@ -116,16 +117,12 @@ t_matrix		rotate_about_x_center(t_matrix a, float x);
 t_matrix		rotate_about_y_center(t_matrix a, float y);
 t_matrix		rotate_about_z_center(t_matrix a, float z);
 t_matrix		rotate_about_x(t_matrix a, float x);
-t_matrix        rotate_about_y(t_matrix a, float y);
-t_matrix        rotate_about_z(t_matrix a, float z);
+t_matrix		rotate_about_y(t_matrix a, float y);
+t_matrix		rotate_about_z(t_matrix a, float z);
 
 void			init_camera(t_env *env);
 int				cam_trans(int keycode, t_env *env);
 int				cam_rotate(int keycode, t_env *env);
-
-t_matrix look_at(t_env *env, t_vector eye,
-				 t_vector target, t_vector up_dir);
-
 
 void			init_clip(t_env *env);
 void			normalize(t_env *env);

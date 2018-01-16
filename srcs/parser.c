@@ -6,7 +6,7 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/02 14:01:57 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/13 09:05:38 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/16 11:15:30 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,21 @@ static void		calculate_points(t_object *obj, t_list *head)
 	obj->p_in_row[i] = points;
 }
 
+static void		check_pushed(t_object *obj)
+{
+	size_t i;
+
+	i = 0;
+	while (i < obj->vert.rows)
+	{
+		if (obj->vert.values[i][2] == 0)
+			obj->is_pushed[i] = 0;
+		else
+			obj->is_pushed[i] = 1;
+		i++;
+	}
+}
+
 t_object		parse_content(t_list *head)
 {
 	int			n_points;
@@ -93,11 +108,13 @@ t_object		parse_content(t_list *head)
 	obj.vert.cols = 4;
 	obj.vert.values = create_matrix(obj.vert.rows,
 										obj.vert.cols);
-	obj.colors = (long long *)(malloc(sizeof(long long) * obj.vert.rows));
+	obj.colors = (long long *)malloc(sizeof(long long) * obj.vert.rows);
 	fill_init_map(&obj, head);
 	n_rows = count_model_rows(head);
 	obj.p_in_row = (size_t *)(malloc(sizeof(size_t) * n_rows));
 	calculate_points(&obj, head);
+	obj.is_pushed = (char *)malloc(sizeof(char) * obj.vert.rows);
+	check_pushed(&obj);
 	ft_lst_erase(head);
 	return (obj);
 }

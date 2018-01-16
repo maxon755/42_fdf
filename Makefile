@@ -6,7 +6,7 @@
 #    By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/28 08:37:35 by mgayduk           #+#    #+#              #
-#    Updated: 2018/01/14 15:41:53 by mgayduk          ###   ########.fr        #
+#    Updated: 2018/01/16 11:19:44 by mgayduk          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -43,6 +43,7 @@ SRC :=	main.c 		        \
 		camera_control.c	\
 		clip.c				\
 		transformations.c	\
+		transformations2.c	\
 		helpers.c			\
 		drawer.c			\
 		primitives.c		\

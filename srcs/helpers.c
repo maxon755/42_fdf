@@ -6,7 +6,7 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/26 18:15:50 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/13 15:18:24 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/16 11:09:04 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,8 @@ void		print_notations(t_env *env)
 			"z rotation : a, d");
 	mlx_string_put(env->mlx, env->win, NX_P, 10 * NY_P, N_COLOR,
 			"change color : 1 - 4");
+	mlx_string_put(env->mlx, env->win, NX_P, 12 * NY_P, N_COLOR,
+			"push up / down : p, o");
+	mlx_string_put(env->mlx, env->win, NX_P, 13 * NY_P, N_COLOR,
+			"bend up / down : ;, l");
 }
