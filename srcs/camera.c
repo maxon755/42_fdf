@@ -6,7 +6,7 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/10 08:52:55 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/16 11:14:01 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/16 12:55:30 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static t_matrix	look_at(t_env *env, t_vector eye,
 static void		init_steps(t_env *env)
 {
 	env->camera.xy_step = env->obj.amp.x / 10;
-	env->camera.z_step = env->obj.amp.z / 10;
+	env->camera.z_step = env->camera.far / 50;
 }
 
 void			init_camera(t_env *env)
@@ -63,11 +63,9 @@ void			init_camera(t_env *env)
 	float		c;
 
 	env->camera.near = 1;
-	env->camera.far = 10;
 	env->camera.fov_h = DEG(90);
 	env->camera.fov_v = env->camera.fov_h * SCREEN_HEIGHT / SCREEN_WIDTH;
 	env->camera.target = get_center(env->world.vert);
-	init_steps(env);
 	if (env->obj.amp.x >= env->obj.amp.y && env->obj.amp.x >= env->obj.amp.z)
 		c = 1 / tan(env->camera.fov_h / 2) * env->obj.amp.x + 5;
 	else if (env->obj.amp.y >= env->obj.amp.x &&
@@ -76,6 +74,8 @@ void			init_camera(t_env *env)
 	else
 		c = env->obj.amp.z + 10;
 	env->camera.eye = get_vector(0, 0, c);
+	env->camera.far = 2 * c;
+	init_steps(env);
 	env->camera.up_dir = get_vector(0, -1, 0);
 	env->camera.look = look_at(env, env->camera.eye, env->camera.target,
 						env->camera.up_dir);
