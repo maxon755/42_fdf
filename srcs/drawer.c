@@ -6,7 +6,7 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/02 18:29:23 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/16 12:52:10 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/16 13:03:25 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@ void		draw_figure(t_env *env)
 			j++;
 		}
 		if (env->obj.vert.values[i][1] == env->obj.vert.values[i + 1][1])
-			if (not_clipped(env->clip.vert.values[i]) ||
+			if (not_clipped(env->clip.vert.values[i]) &&
 				not_clipped(env->clip.vert.values[i + 1]))
 				draw_line(env, i, i + 1);
 		if (i + env->obj.p_in_row[j] < env->obj.vert.rows &&
 			env->obj.vert.values[i][0] ==
 			env->obj.vert.values[i + env->obj.p_in_row[j]][0])
-			if (not_clipped(env->clip.vert.values[i]) ||
+			if (not_clipped(env->clip.vert.values[i]) &&
 				not_clipped(env->clip.vert.values[i + env->obj.p_in_row[j]]))
 				draw_line(env, i, i + env->obj.p_in_row[j]);
 		i++;
