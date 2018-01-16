@@ -6,7 +6,7 @@
 /*   By: mgayduk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/14 15:26:26 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/01/16 11:15:09 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/01/16 13:18:46 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,5 @@ int			deformations(int keycode, t_env *env)
 		bend_up(env);
 	if (keycode == L_KEY)
 		bend_down(env);
-	print_matrix(env->obj.vert);
 	return (0);
 }
