@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgayduk <maksim.gayduk@gmail.com>          +#+  +:+       +#+        */
+/*   By: mgayduk <mgayduk@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 16:10:16 by mgayduk           #+#    #+#             */
-/*   Updated: 2018/03/22 09:49:28 by mgayduk          ###   ########.fr       */
+/*   Updated: 2018/06/17 16:53:51 by mgayduk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,8 @@ int		main(int argc, char **argv)
 		return (0);
 	}
 	env.mlx = mlx_init();
-	env.win = mlx_new_window(env.mlx, SCREEN_WIDTH, SCREEN_HEIGHT,
-						ft_strjoin("FdF mgayduk - ", argv[1]));
+	env.win = mlx_new_window(env.mlx, SCREEN_WIDTH, SCREEN_HEIGHT, 
+														"FdF mgayduk");
 	env.obj = parse_content(get_content(argv[1]));
 	env.obj.amp = get_amp(env.obj.vert);
 	set_object_in_world(&env);
